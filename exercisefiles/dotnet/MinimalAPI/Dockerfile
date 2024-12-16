@@ -7,7 +7,14 @@ WORKDIR /source
 # copy csproj and restore as distinct layers
 COPY *.sln .
 COPY MinimalAPI/*.csproj ./MinimalAPI/
-RUN dotnet restore "MinimalAPI/MinimalAPI.csproj" -r linux-x64 --disable-parallel
+
+# Install any missing dependencies
+RUN apt-get update && apt-get install -y \
+    libicu-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Run dotnet restore with no cache to avoid using cached layers
+RUN dotnet restore "MinimalAPI/MinimalAPI.csproj" -r linux-x64 --disable-parallel --no-cache
 
 # copy everything else and build app
 COPY MinimalAPI/. ./MinimalAPI/
