@@ -13,6 +13,9 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Print the contents of the MinimalAPI directory to ensure the csproj file is copied
+RUN ls -la ./MinimalAPI/
+
 # Run dotnet restore with no cache to avoid using cached layers
 RUN dotnet restore "MinimalAPI/MinimalAPI.csproj" -r linux-x64 --disable-parallel --no-cache
 
