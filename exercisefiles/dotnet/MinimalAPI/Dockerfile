@@ -8,6 +8,10 @@ WORKDIR /source
 COPY *.sln .
 COPY MinimalAPI/*.csproj ./MinimalAPI/
 
+# Print the contents of the source directory to ensure files are copied
+RUN ls -la /source
+RUN ls -la /source/MinimalAPI
+
 # Install any missing dependencies
 RUN apt-get update && apt-get install -y \
     libicu-dev \
