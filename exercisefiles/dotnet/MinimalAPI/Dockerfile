@@ -5,12 +5,13 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /source
 
 # copy csproj and restore as distinct layers
-COPY *.sln .
-COPY MinimalAPI/*.csproj ./MinimalAPI/
+# COPY *.sln .
+# COPY MinimalAPI/*.csproj ./MinimalAPI/
+COPY . ./MinimalAPI/
 
 # Print the contents of the source directory to ensure files are copied
-RUN ls -la /source
-RUN ls -la /source/MinimalAPI
+# RUN ls -la /source
+# RUN ls -la /source/MinimalAPI
 
 # Install any missing dependencies
 RUN apt-get update && apt-get install -y \
