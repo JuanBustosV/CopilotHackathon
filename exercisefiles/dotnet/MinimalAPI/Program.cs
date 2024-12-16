@@ -129,7 +129,7 @@ app.MapGet("/listfiles", () =>
 /// <returns>The memory consumption of the process in GB.</returns>
 app.MapGet("/calculatememoryconsumption", () => 
 {
-    var memory = System.Diagnostics.Process.GetCurrentProcess().WorkingSet64 / 1024.0 / 1024.0 / 1024.0;
+    var memory = Math.Round(System.Diagnostics.Process.GetCurrentProcess().WorkingSet64 / 1024.0 / 1024.0 / 1024.0, 2);
     return Results.Ok(memory);
 });
 
